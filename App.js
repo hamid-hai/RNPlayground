@@ -1,3 +1,6 @@
+// This demo is to focus on iOS and Android development with React Native.
+// Testing devices used were an iPhone 13 running iOS 16.0 and Pixel 6 running Android 13
+
 import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList } from 'react-native';
 import { useState } from 'react'
 
