@@ -26,6 +26,10 @@ export default function App() {
     </View>
 
 
+{/* 
+  https://reactnative.dev/docs/scrollview
+  Added ScrollView, mixed with a standard view to provide a scrollable container to prevent overflowing tasks.
+*/}
     <View style={styles.goalsContainer}>
     <ScrollView >
       {courseGoals.map((goal) =>
