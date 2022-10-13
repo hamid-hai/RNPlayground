@@ -31,7 +31,7 @@ export default function App() {
   Added ScrollView, mixed with a standard view to provide a scrollable container to prevent overflowing tasks.
 */}
     <View style={styles.goalsContainer}>
-    <ScrollView >
+    <ScrollView alwaysBounceVertical={false}>
       {courseGoals.map((goal) =>
       <Text style={styles.goalItem} key={goal}>
         {goal}</Text>)}
