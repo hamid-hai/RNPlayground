@@ -17,6 +17,13 @@ const [courseGoals, setCourseGoals] = useState([]);
     console.log(enteredGoalText)
     setCourseGoals(currentCourseGoals => [...currentCourseGoals, {text: enteredGoalText, key: Math.random().toString()}])
   };
+
+// Removal of list items function here
+function deleteGoalHandler(id) {
+  setCourseGoals(currentCourseGoals => {
+    return currentCourseGoals.filter((goal) => goal.id !== id);
+  });
+}
  
   return (
     <View style={styles.appContainer}>
@@ -29,7 +36,7 @@ const [courseGoals, setCourseGoals] = useState([]);
 */}
     <View style={styles.goalsContainer}>
     <FlatList alwaysBounceVertical={false} data={courseGoals} renderItem={(itemData) => {
-      return <GoalItem text={itemData.item.text} />;
+      return <GoalItem text={itemData.item.text} id={itemData.item.id} onDeleteItem={deleteGoalHandler}/>;
     }}  />
     </View>
     </View>
