@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList } from 'react-native';
 import { useState } from 'react'
 
 export default function App() {
@@ -6,18 +6,22 @@ export default function App() {
   const [enteredGoalText, setEnteredGoalText] = useState('');
   const [courseGoals, setCourseGoals] = useState([]);
 
+
+  // Function to handle the input value provided in the field on screen, passes to addGoalHandler
   function goalInputHandler(enteredText) {
     setEnteredGoalText(enteredText)
     console.log(enteredText)
     
   };
 
+
+// Function that returns an object enteredGoalText with a key, that is assigned a random value/digit by the Math Module
   function addGoalHandler(){
     console.log(enteredGoalText)
-    setCourseGoals(currentCourseGoals => [...currentCourseGoals, enteredGoalText])
+    setCourseGoals(currentCourseGoals => [...currentCourseGoals, {text: enteredGoalText, key: Math.random().toString()}])
   };
 
-
+// Returning the 
   return (
     <View style={styles.appContainer}>
     <View style={styles.inputContainer}>
@@ -27,17 +31,18 @@ export default function App() {
 
 
 {/* 
-  https://reactnative.dev/docs/scrollview
-  Added ScrollView, mixed with a standard view to provide a scrollable container to prevent overflowing tasks.
+  https://reactnative.dev/docs/flatlist
+  Using FlatList to improve applications perfoamce compared to ScrollView which negatively impacts applications performance with large dynamic arrays of data
 */}
     <View style={styles.goalsContainer}>
-    <ScrollView alwaysBounceVertical={false}>
-      {courseGoals.map((goal) =>
-      <Text style={styles.goalItem} key={goal}>
-        {goal}</Text>)}
-    </ScrollView>
+    <FlatList data={courseGoals} renderItem={(itemData) => {
+      return (
+        <View style={styles.goalItem}>
+          <Text style={styles.goalItem}>{itemData.item.text}</Text>
+        </View>
+      );
+    }} alwaysBounceVertical={false} />
     </View>
-
     </View>
   );
 }
