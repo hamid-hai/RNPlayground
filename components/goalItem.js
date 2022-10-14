@@ -2,11 +2,13 @@ import {StyleSheet, View, Text, Pressable} from 'react-native';
 
 function GoalItem(props) {
     return (
-    <Pressable onPress={props.onDeleteItem.bind(this, props.id)}>
+    
     <View style={styles.goalItem}>
-        <Text style={styles.goalItem}>{props.text}</Text>
+      <Pressable android_ripple={{color: '#dddddd'}} onPress={props.onDeleteItem.bind(this, props.id)} style={(pressedGoal) => pressedGoal && styles.pressedItem}>
+        <Text style={styles.goalText}>{props.text}</Text>
+      </Pressable>
     </View>
-    </Pressable>
+    
     ) 
 
 };
@@ -18,11 +20,18 @@ const styles = StyleSheet.create({
         margin: 8,
         borderRadius: 6,
         backgroundColor: '#5e0acc',
-        padding: 8,
         color: 'white'
+      },
+
+      // Bug found, seems to think all items are being pressed within the array, visible when setting 'opacity' to 0.5
+      pressedItem: {
+        opacity: 1
       },
 
       goalText: {
         color: 'white',
+        padding: 6,
+        borderRadius: 6,
+        margin: 8,
       }
 });
